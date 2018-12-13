@@ -7,50 +7,62 @@ let generateRandomNumber = function (start, range) {
 $("#number-to-guess").append(generateRandomNumber(30, 100));
 
 //each crystal needs value
-let numberOptions = [10, 5, 3, 7];
+let numberOptions = [10, 5, 3, 7]; // 4
+let images = [
+    "assets/images/blue.jpg",
+    "assets/images/darkblue.jpg",
+    "assets/images/pink.jpg",
+    "assets/images/red.jpg"
+]; // 4
 
 let counter = 0;
 
-//for (let i = 0; i < numberOptions.length; i++) {
 
-//}
+function generateCrystal(image) {
+    let randomNumber = generateRandomNumber(1, 15);
+
+    return `  
+        <div class="col-md-3">
+            <input 
+                class="crystal" 
+                type="image" 
+                src=${image}
+                data-crystalvalue=${randomNumber}
+                alt="blue crystal"
+            >
+        </div>
+    `
+}
+
+for (let i = 0; i < 4; i++) {
+    let image = images[i];
+    let crystal = generateCrystal(image);
+    $('.crystal-container').append( crystal );
+}
+
+
+
 
 //each crystal clicked adds score
-$("#allCrystal").on("click", function () {
-    let imageCrystal = $(".crystal")
-
-    $(imageCrystal).attr("data-crystalvalue", generateRandomNumber(1, 5));
-
-    let imageCrystal2 = $(".crystal2")
-
-    $(imageCrystal2).attr("data-crystalvalue", generateRandomNumber(6, 10));
-
-    let imageCrystal3 = $(".crystal3")
-
-    $(imageCrystal3).attr("data-crystalvalue", generateRandomNumber(11, 15));
-
-    let imageCrystal4 = $(".crystal4")
-
-    $(imageCrystal4).attr("data-crystalvalue", generateRandomNumber(16, 18));
-
+$(".crystal").on("click", function () {
     let crystalValue = ($(this).attr("data-crystalvalue"));
+
     crystalValue = parseInt(crystalValue);
-    console.log($(this));
+  
     counter += crystalValue;
 
-    alert("New score: " + counter);
+     alert("New score: " + counter);
 
-    // if (counter === targetNumber) {
-    //   alert("You win!");
-    // }
+    if (counter === $("#number-to-guess") ) {
+       alert("You win!");
+     }
 
-    // else if (counter >= targetNumber) {
-    //   alert("You lose!!");
-    // }
+     else if (counter >= $("#number-to-guess")) {
+      alert("You lose!!");
+     }
 
 });
 
 //each click add to total sum
 
 //check to see if total equals random number picked
-
