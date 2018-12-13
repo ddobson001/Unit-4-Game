@@ -1,4 +1,5 @@
 //set random numbers
+$( document ).ready(function() {
 let generateRandomNumber = function (start, range) {
 
     let getRandom = Math.floor((Math.random() * (range - start)) + start);
@@ -7,7 +8,6 @@ let generateRandomNumber = function (start, range) {
 $("#number-to-guess").append(generateRandomNumber(30, 100));
 
 //each crystal needs value
-let numberOptions = [10, 5, 3, 7]; // 4
 let images = [
     "assets/images/blue.jpg",
     "assets/images/darkblue.jpg",
@@ -34,7 +34,7 @@ function generateCrystal(image) {
     `
 }
 
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < images.length; i++) {
     let image = images[i];
     let crystal = generateCrystal(image);
     $('.crystal-container').append( crystal );
@@ -63,6 +63,7 @@ $(".crystal").on("click", function () {
 
 });
 
+});
 //each click add to total sum
 
 //check to see if total equals random number picked
