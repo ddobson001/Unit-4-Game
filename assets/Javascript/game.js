@@ -51,13 +51,13 @@ $(".crystal").on("click", function () {
   
     counter += crystalValue;
 
-     alert("New score: " + counter);
+    $("#score").text(counter);
 
-    if (counter === $("#number-to-guess") ) {
+    if ($("#score") === $("#number-to-guess")) {
        alert("You win!");
      }
 
-     else if (counter >= $("#number-to-guess")) {
+     else if (counter >= generateRandomNumber) {
       alert("You lose!!");
      }
 
