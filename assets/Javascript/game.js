@@ -1,29 +1,40 @@
-- //set random numbers
-    $(document).ready(function () {
+$(document).ready(function () {
 
+    ///Global Variables////
         let lose = 0;
-        let wins =0;
-
-        let generateRandomNumber = function (start, range) {
-            let getRandom = Math.floor((Math.random() * (range - start)) + start);
-            return getRandom;
-
-        }
-
-        let guess = generateRandomNumber(30, 100);
-        $("#number-to-guess").append(guess);
-        //each crystal needs value
-
-
+        let wins = 0;
+        let counter = 0;
         let images = [
             "assets/images/blue.jpg",
             "assets/images/darkblue.jpg",
             "assets/images/pink.jpg",
             "assets/images/red.jpg"
-        ]; // 4
-        let counter = 0;
+        ];
+
+    ///Reset Game///
+        function ResetGlobalVariables() {
+            counter = 0;
+        crystalValue = 0;
+    
+        };
+
+        function initializeGame() {
+
+///Generate Random Number to match////
+        let generateRandomNumber = function (start, range) {
+            let getRandom = Math.floor((Math.random() * (range - start)) + start);
+            return getRandom;
+
+        }
+       
+        let guess = generateRandomNumber(19, 120);
+        $("#number-to-guess").append(guess);
+
+        
+      
+////Generate Crystal and assign random number////
         function generateCrystal(image) {
-            let randomNumber = generateRandomNumber(1, 15);
+            let randomNumber = generateRandomNumber(1, 12);
             return `
 <div class="col-md-3">
 <input
@@ -34,8 +45,11 @@ data-crystalvalue=${randomNumber}
 alt="blue crystal"
 >
 </div>
-`
-        }
+`   
+}
+
+
+
 
 
         for (let i = 0; i < images.length; i++) {
@@ -45,9 +59,12 @@ alt="blue crystal"
         }
 
 
+
+
+
+
         //each crystal clicked adds score
         $(".crystal").on("click", function () {
-
 
 
 
@@ -57,20 +74,25 @@ alt="blue crystal"
             $("#score").text(counter);
 
             if (counter === guess) {
-                alert("You win!");
                 wins++;
                 $("#wins").text(wins);
-            }
-            
-            else if (counter >= guess) {
+                ResetGlobalVariables();
+                alert("Victory!");
                 
-        
-                alert("You lose!!");
+            }
+
+            else if (counter >= guess) {
                 lose++;
                 $("#lose").text(lose);
+                ResetGlobalVariables();
+               
+                alert("Loser!!");
             }
         });
+       
 
-    });
+    };
+    initializeGame();
+})
 //each click add to total sum
 //check to see if total equals random number picked
